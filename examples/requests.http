@@ -1,0 +1,50 @@
+@baseUrl = http://127.0.0.1:8000
+@email = demo@example.test
+@password = replace-with-your-local-password
+@walletId = 1
+@token = replace-with-login-token
+
+### 1. Register while the queue worker is stopped.
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Demo user",
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "password_confirmation": "{{password}}"
+}
+
+### 2. Log in. Copy access_token and registration's wallet_id into the variables.
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### 3. Missing address is created synchronously.
+POST {{baseUrl}}/api/wallets/{{walletId}}/deposit-address
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{"chain": "demo-eth"}
+
+### 4. Run the worker, then repeat step 3: the address stays the same.
+
+### 5. Request the other chain.
+POST {{baseUrl}}/api/wallets/{{walletId}}/deposit-address
+Authorization: Bearer {{token}}
+Content-Type: application/json
+Accept: application/json
+
+{"chain": "demo-tron"}
+
+### 6. Logout revokes the current token.
+POST {{baseUrl}}/api/auth/logout
+Authorization: Bearer {{token}}
+Accept: application/json

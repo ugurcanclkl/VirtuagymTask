@@ -1,0 +1,7 @@
+{
+  "chain": "demo-eth",
+  "address": "replace-with-returned-demo-address",
+  "tx_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "event_index": 0,
+  "amount_minor": 12000
+}

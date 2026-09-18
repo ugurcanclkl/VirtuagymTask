@@ -1,0 +1,11 @@
+/.env
+/.env.*
+!/.env.example
+/vendor/
+/storage/*
+!/storage/.gitkeep
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
+/database/*.sqlite
+/.phpunit.cache/
+/dist/
